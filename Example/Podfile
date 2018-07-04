@@ -1,0 +1,11 @@
+use_frameworks!
+
+target 'JMLoginModule_Example' do
+  pod 'JMLoginModule', :path => '../'
+
+  target 'JMLoginModule_Tests' do
+    inherit! :search_paths
+
+    
+  end
+end

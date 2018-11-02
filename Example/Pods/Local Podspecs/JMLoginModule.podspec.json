@@ -1,0 +1,24 @@
+{
+  "name": "JMLoginModule",
+  "version": "0.0.2",
+  "summary": "登录组件（依赖TJMBaseTool）",
+  "description": "包括登录、验证码登录、忘记密码、注册、修改密码功能(没有sign 功能，后续更新)",
+  "homepage": "https://github.com/JiamingTu/JMLoginModule",
+  "license": {
+    "type": "MIT",
+    "file": "LICENSE"
+  },
+  "authors": {
+    "JiamingTu": "tujiamingdd@sina.com"
+  },
+  "source": {
+    "git": "https://github.com/JiamingTu/JMLoginModule.git",
+    "tag": "0.0.2"
+  },
+  "platforms": {
+    "ios": "9.0"
+  },
+  "source_files": "JMLoginModule/Classes/**/*",
+  "public_header_files": "JMLoginModule/Classes/**/*.h",
+  "frameworks": "UIKit"
+}

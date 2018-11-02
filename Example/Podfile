@@ -1,7 +1,8 @@
-use_frameworks!
+source 'https://github.com/CocoaPods/Specs.git'
+source 'https://github.com/JiamingTu/TJMSpec.git'
 
 target 'JMLoginModule_Example' do
-  pod 'JMLoginModule', :path => '../'
+  
 
   target 'JMLoginModule_Tests' do
     inherit! :search_paths

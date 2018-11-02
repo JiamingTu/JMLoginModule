@@ -6,9 +6,10 @@
 //
 
 #import "JMLoginHandler.h"
-#import "TJMNetworkingManager.h"
-#import "JMDefine.h"
-#import "NSString+RegEx.h"
+
+#define LH_StringIsEmpty(string) ([string isEqual:@"NULL"] || [string isKindOfClass:[NSNull class]] || [string isEqual:[NSNull null]] || [string isEqual:NULL] || [[string class] isSubclassOfClass:[NSNull class]] || string == nil || string == NULL || [string isKindOfClass:[NSNull class]] || [[string stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] length]==0 || [string isEqualToString:@"<null>"] || [string isEqualToString:@"(null)"] ? @"" : string )
+
+
 @interface JMLoginHandler ()
 {
     NSString *_realNoPhoneNum;
@@ -102,21 +103,21 @@
 #pragma  mark - notice
 - (NSString *)notice {
     //每个Type都要判断的(账号)
-    if ([JMStringIsEmpty(self.mobile) isEqualToString:@""]) {
+    if ([LH_StringIsEmpty(self.mobile) isEqualToString:@""]) {
         return _realNoPhoneNum;
-    } else if (![self.mobile isMobileNumber]) {
+    } else if (![self lh_isMobileNumber:self.mobile]) {
         return _realWrongPhoneNum;
     }
     //根据type 判断
     if (self.loginType == JMLoginTypeForget || _loginType == JMLoginTypeRegister || JMLoginTypeCodeLogin) {
-        if ([JMStringIsEmpty(self.code) isEqualToString:@""]) {
+        if ([LH_StringIsEmpty(self.code) isEqualToString:@""]) {
             return _realNoCode;
         } else if (self.code.length < self.codeLengthLimit) {
             return _realCodeToolShort;
         }
     }
     if (self.loginType != JMLoginTypeCodeLogin) {
-        if ([JMStringIsEmpty(self.pswd) isEqualToString:@""]) {
+        if ([LH_StringIsEmpty(self.pswd) isEqualToString:@""]) {
             return _noPswd;
         } else if (self.pswd.length < _pswdLengthLimit) {
             return _realPswdTooShort;
@@ -135,98 +136,54 @@
 }
 
 - (NSString *)getCodeNotice {
-    if ([JMStringIsEmpty(self.mobile) isEqualToString:@""]) {
+    if ([LH_StringIsEmpty(self.mobile) isEqualToString:@""]) {
         return _realNoPhoneNum;
-    } else if (![self.mobile isMobileNumber]) {
+    } else if (![self lh_isMobileNumber:self.mobile]) {
         return _realWrongPhoneNum;
     }
     return nil;
 }
 
-#pragma  mark - network
-- (void)networkWithMethod:(NSString *)method isGetCode:(BOOL)isGetCode url:(NSString *)url needToken:(BOOL)needToken parameters:(NSDictionary *)parameters response:(void(^)(BOOL isSuccess, id responseObj, NSString *msg))response; {
-    if ([method isEqualToString:@"GET"]) {
-        [TJMNetworkingManager GET:url isNeedToken:needToken parameters:parameters progress:nil success:^(id successObj, NSString *msg) {
-            if (response) response(YES, successObj, msg);
-            if (isGetCode) [self startCountDown];
-        } failure:^(NSInteger code, NSString *failString) {
-            if (response) response(NO, nil, failString);
-            NSLog(@"失败");
-            if (isGetCode) [self startCountDown];
-        }];
-    } else if ([method isEqualToString:@"POST"]) {
-        [TJMNetworkingManager POST:url isNeedToken:needToken parameters:parameters progress:nil success:^(id successObj, NSString *msg) {
-            if (response) response(YES, successObj, msg);
-            if (isGetCode) [self startCountDown];
-        } failure:^(NSInteger code, NSString *failString) {
-            if (response) response(NO, nil, failString);
-        }];
-    } else if ([method isEqualToString:@"PUT"]) {
-        [TJMNetworkingManager PUT:url isNeedToken:needToken parameters:parameters success:^(id successObj, NSString *msg) {
-            if (response) response(YES, successObj, msg);
-            if (isGetCode) [self startCountDown];
-        } failure:^(NSInteger code, NSString *failString) {
-            if (response) response(NO, nil, failString);
-        }];
+#pragma  mark - sign 处理
++ (NSDictionary *)signWithDictionary:(NSDictionary *)dictionary pswdKey:(NSString *)pswdKey secretKey:(NSString *)secretKey encrypt:(NSString *(^)(NSString *keyword))encrypt {
+    //变为可变数组
+    NSMutableDictionary *parameters = [NSMutableDictionary dictionaryWithDictionary:dictionary];
+    //MD5 加密
+    NSString *pswd = parameters[pswdKey];
+    if (![LH_StringIsEmpty(pswd) isEqualToString:@""]) {
+        pswd = encrypt(pswd);
+        parameters[pswdKey] = pswd;
     }
+    //升序得到 健值对应的两个数组
+    NSArray *allKeyArray = [parameters allKeys];
+    NSArray *afterSortKeyArray = [allKeyArray sortedArrayUsingComparator:^NSComparisonResult(id  _Nonnull obj1, id  _Nonnull obj2) {
+        NSComparisonResult resuest = [obj1 compare:obj2];
+        return resuest;
+    }];
+    //通过排列的key值获取value
+    NSMutableArray *valueArray = [NSMutableArray array];
+    for (NSString *sortsing in afterSortKeyArray) {
+        NSString *valueString = [parameters objectForKey:sortsing];
+        [valueArray addObject:valueString];
+    }
+    //健值合并
+    NSMutableArray *signArray = [NSMutableArray array];
+    for (int i = 0 ; i < afterSortKeyArray.count; i++) {
+        NSString *keyValue = [NSString stringWithFormat:@"%@%@",afterSortKeyArray[i],valueArray[i]];
+        [signArray addObject:keyValue];
+    }
+    //signString用于签名的原始参数集合
+    NSString *signString = [signArray componentsJoinedByString:@""];
+    //秘钥拼接
+    signString = [NSString stringWithFormat:@"%@%@%@",secretKey,signString,secretKey];
+    //MD5加密
+    signString = encrypt(signString);
+    //添加健值  sign
+    [parameters setObject:signString forKey:@"sign"];
+    return parameters;
+
 }
 
-- (void)loginWithMethod:(NSString *)method response:(void (^)(BOOL, id, NSString *))response {
-    NSString *notice = [self notice];
-    if (notice) {
-        if (response) response(NO, nil, notice);
-    } else {
-        NSString *url = _loginUrl;
-        NSDictionary *parameters = @{
-                                     _mobileKey : _mobile,
-                                     _pswdKey   : _pswd
-                                     };
-        [self networkWithMethod:method isGetCode:NO url:url needToken:NO parameters:parameters response:response];
-    }
-}
-
-- (void)getcodeWithMethod:(NSString *)method response:(void (^)(BOOL, id, NSString *))response {
-    NSString *notice = [self getCodeNotice];
-    if (notice) {
-        if (response) response(NO, nil, notice);
-    } else {
-        NSString *url = _getCodeUrl;
-        NSDictionary *parameters = @{
-                                 _mobileKey : _mobile
-                                 };
-        [self networkWithMethod:method isGetCode:YES url:url needToken:NO parameters:parameters response:response];
-    }
-}
-
-- (void)codeConfirmWithMethod:(NSString *)method response:(void (^)(BOOL, id, NSString *))response {
-    NSString *notice = [self notice];
-    if (notice) {
-        if (response) response(NO, nil, notice);
-    } else {
-        NSString *url = _codeConfirmUrl;
-        NSDictionary *parameters = @{
-                                     _mobileKey : _mobile,
-                                     _codeKey   : _code,
-                                     _pswdKey   : _pswd
-                                     };
-        [self networkWithMethod:method isGetCode:NO url:url needToken:NO parameters:parameters response:response];
-    }
-}
-
-- (void)changeWithMethod:(NSString *)method needToken:(BOOL)needToken response:(void (^)(BOOL, id, NSString *))response {
-    NSString *notice = [self notice];
-    if (notice) {
-        if (response) response(NO, nil, notice);
-    } else {
-        NSString *url = _changeUrl;
-        NSDictionary *parameters = @{
-                                     _mobileKey     : _mobile,
-                                     _oldPswdKey    : _pswd,
-                                     _freshPswdKey  : _freshPswd
-                                     };
-        [self networkWithMethod:method isGetCode:NO url:url needToken:NO parameters:parameters response:response];
-    }
-}
 
 #pragma  mark - timer
 - (void)startCountDown {
@@ -255,4 +212,59 @@
     }
 }
 
+#pragma  mark - 判断是否电话号码
+- (BOOL)lh_isMobileNumber:(NSString *)mobile {
+    if (mobile.length != 11)
+    {
+        return NO;
+    }
+    /**
+     * 手机号码:
+     * 13[0-9], 14[5,7], 15[0, 1, 2, 3, 5, 6, 7, 8, 9], 17[0, 1, 6, 7, 8], 18[0-9]
+     * 移动号段: 134,135,136,137,138,139,147,150,151,152,157,158,159,170,178,182,183,184,187,188
+     * 联通号段: 130,131,132,145,155,156,170,171,175,176,185,186
+     * 电信号段: 133,149,153,170,173,177,180,181,189
+     */
+    //    NSString *MOBILE = @"^1(3[0-9]|4[57]|5[0-35-9]|7[0135678]|8[0-9])\\d{8}$";
+    NSString *MOBILE = @"^1[0-9]{10}$";//1开头且为11位
+    /**
+     * 中国移动：China Mobile
+     * 134,135,136,137,138,139,147,150,151,152,157,158,159,170,178,182,183,184,187,188
+     */
+    NSString *CM = @"^1(3[4-9]|4[7]|5[0-27-9]|7[08]|8[2-478])\\d{8}$";
+    /**
+     * 中国联通：China Unicom
+     * 130,131,132,145,155,156,170,171,175,176,185,186
+     */
+    NSString *CU = @"^1(3[0-2]|4[5]|5[56]|7[0156]|8[56])\\d{8}$";
+    /**
+     * 中国电信：China Telecom
+     * 133,149,153,170,173,177,180,181,189
+     */
+    NSString *CT = @"^1(3[3]|4[9]|53|7[037]|8[019])\\d{8}$";
+    
+    
+    NSPredicate *regExtestmobile = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", MOBILE];
+    NSPredicate *regExtestcm = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", CM];
+    NSPredicate *regExtestcu = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", CU];
+    NSPredicate *regExtestct = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", CT];
+    
+    if (([regExtestmobile evaluateWithObject:mobile] == YES)
+        || ([regExtestcm evaluateWithObject:mobile] == YES)
+        || ([regExtestct evaluateWithObject:mobile] == YES)
+        || ([regExtestcu evaluateWithObject:mobile] == YES))
+    {
+        return YES;
+    }
+    else
+    {
+        return NO;
+    }
+}
+
 @end
+
+
+
+
+

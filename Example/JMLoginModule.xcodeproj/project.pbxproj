@@ -22,8 +22,8 @@
 		6003F5BC195388D20070C39A /* Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6003F5BB195388D20070C39A /* Tests.m */; };
 		71719F9F1E33DC2100824A3D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 71719F9D1E33DC2100824A3D /* LaunchScreen.storyboard */; };
 		873B8AEB1B1F5CCA007FD442 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 873B8AEA1B1F5CCA007FD442 /* Main.storyboard */; };
-		98B1D25BB9BBAEF99807491D /* Pods_JMLoginModule_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BED276FBB4879ABE93A07193 /* Pods_JMLoginModule_Example.framework */; };
-		E7BED17332D8B179D0388026 /* Pods_JMLoginModule_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E64AA5D4137073769E205109 /* Pods_JMLoginModule_Tests.framework */; };
+		8D91C4AEFEBF2093397A6DB5 /* libPods-JMLoginModule_Tests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A003C094E63EA2507FCA197 /* libPods-JMLoginModule_Tests.a */; };
+		F7D0BE6EDB7A32D0A1FA6010 /* libPods-JMLoginModule_Example.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 49CB29038942CCE77653B981 /* libPods-JMLoginModule_Example.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -37,8 +37,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		20C5E514E2DDD6604E79A7D0 /* JMLoginModule.podspec */ = {isa = PBXFileReference; includeInIndex = 1; name = JMLoginModule.podspec; path = ../JMLoginModule.podspec; sourceTree = "<group>"; };
+		20C5E514E2DDD6604E79A7D0 /* JMLoginModule.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = JMLoginModule.podspec; path = ../JMLoginModule.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		3013CAA9767617779AC1CC7D /* Pods-JMLoginModule_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JMLoginModule_Example.debug.xcconfig"; path = "Pods/Target Support Files/Pods-JMLoginModule_Example/Pods-JMLoginModule_Example.debug.xcconfig"; sourceTree = "<group>"; };
+		49CB29038942CCE77653B981 /* libPods-JMLoginModule_Example.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-JMLoginModule_Example.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6003F58A195388D20070C39A /* JMLoginModule_Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JMLoginModule_Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6003F58D195388D20070C39A /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		6003F58F195388D20070C39A /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -61,12 +62,11 @@
 		71719F9E1E33DC2100824A3D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		7A63554961846079F5B633D3 /* Pods-JMLoginModule_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JMLoginModule_Example.release.xcconfig"; path = "Pods/Target Support Files/Pods-JMLoginModule_Example/Pods-JMLoginModule_Example.release.xcconfig"; sourceTree = "<group>"; };
 		873B8AEA1B1F5CCA007FD442 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Main.storyboard; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		8A003C094E63EA2507FCA197 /* libPods-JMLoginModule_Tests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-JMLoginModule_Tests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9272D99D8B900EB8F0DDCD6B /* Pods-JMLoginModule_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JMLoginModule_Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-JMLoginModule_Tests/Pods-JMLoginModule_Tests.release.xcconfig"; sourceTree = "<group>"; };
-		BC90B2B54E7C132E75CC195D /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
-		BED276FBB4879ABE93A07193 /* Pods_JMLoginModule_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_JMLoginModule_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		BC90B2B54E7C132E75CC195D /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
 		C995E7FCEA64CF3AFD8686D2 /* Pods-JMLoginModule_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JMLoginModule_Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-JMLoginModule_Tests/Pods-JMLoginModule_Tests.debug.xcconfig"; sourceTree = "<group>"; };
-		D42E5539CBDB74758377CFAE /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; name = README.md; path = ../README.md; sourceTree = "<group>"; };
-		E64AA5D4137073769E205109 /* Pods_JMLoginModule_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_JMLoginModule_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D42E5539CBDB74758377CFAE /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,7 +77,7 @@
 				6003F590195388D20070C39A /* CoreGraphics.framework in Frameworks */,
 				6003F592195388D20070C39A /* UIKit.framework in Frameworks */,
 				6003F58E195388D20070C39A /* Foundation.framework in Frameworks */,
-				98B1D25BB9BBAEF99807491D /* Pods_JMLoginModule_Example.framework in Frameworks */,
+				F7D0BE6EDB7A32D0A1FA6010 /* libPods-JMLoginModule_Example.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -88,7 +88,7 @@
 				6003F5B0195388D20070C39A /* XCTest.framework in Frameworks */,
 				6003F5B2195388D20070C39A /* UIKit.framework in Frameworks */,
 				6003F5B1195388D20070C39A /* Foundation.framework in Frameworks */,
-				E7BED17332D8B179D0388026 /* Pods_JMLoginModule_Tests.framework in Frameworks */,
+				8D91C4AEFEBF2093397A6DB5 /* libPods-JMLoginModule_Tests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -134,8 +134,8 @@
 				6003F58F195388D20070C39A /* CoreGraphics.framework */,
 				6003F591195388D20070C39A /* UIKit.framework */,
 				6003F5AF195388D20070C39A /* XCTest.framework */,
-				BED276FBB4879ABE93A07193 /* Pods_JMLoginModule_Example.framework */,
-				E64AA5D4137073769E205109 /* Pods_JMLoginModule_Tests.framework */,
+				49CB29038942CCE77653B981 /* libPods-JMLoginModule_Example.a */,
+				8A003C094E63EA2507FCA197 /* libPods-JMLoginModule_Tests.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -207,7 +207,6 @@
 				6003F586195388D20070C39A /* Sources */,
 				6003F587195388D20070C39A /* Frameworks */,
 				6003F588195388D20070C39A /* Resources */,
-				EF965624C5D26D34CA3FB361 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -247,6 +246,9 @@
 				LastUpgradeCheck = 0720;
 				ORGANIZATIONNAME = JiamingTu;
 				TargetAttributes = {
+					6003F589195388D20070C39A = {
+						DevelopmentTeam = GVHU3TU264;
+					};
 					6003F5AD195388D20070C39A = {
 						TestTargetID = 6003F589195388D20070C39A;
 					};
@@ -328,24 +330,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		EF965624C5D26D34CA3FB361 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-JMLoginModule_Example/Pods-JMLoginModule_Example-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/JMLoginModule/JMLoginModule.framework",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JMLoginModule.framework",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-JMLoginModule_Example/Pods-JMLoginModule_Example-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -485,9 +469,11 @@
 			baseConfigurationReference = 3013CAA9767617779AC1CC7D /* Pods-JMLoginModule_Example.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = GVHU3TU264;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "JMLoginModule/JMLoginModule-Prefix.pch";
 				INFOPLIST_FILE = "JMLoginModule/JMLoginModule-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MODULE_NAME = ExampleApp;
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -500,9 +486,11 @@
 			baseConfigurationReference = 7A63554961846079F5B633D3 /* Pods-JMLoginModule_Example.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = GVHU3TU264;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "JMLoginModule/JMLoginModule-Prefix.pch";
 				INFOPLIST_FILE = "JMLoginModule/JMLoginModule-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MODULE_NAME = ExampleApp;
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";

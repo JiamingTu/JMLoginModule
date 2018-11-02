@@ -7,6 +7,7 @@
 
 #import <Foundation/Foundation.h>
 
+
 typedef enum : NSUInteger {
     JMLoginTypeCodeLogin,
     JMLoginTypeOriginalLogin,
@@ -27,6 +28,8 @@ typedef enum : NSUInteger {
 - (instancetype)initWithLoginType:(JMLoginType)loginType isInternational:(BOOL)isInternational;
 
 @property (nonatomic, assign) JMLoginType loginType;
+
+@property (nonatomic, copy) NSString *jm_secretKey;
 
 @property (nonatomic, copy) NSString *mobile;
 
@@ -62,26 +65,6 @@ typedef enum : NSUInteger {
 
 - (void)cancelTiemr;
 
-
-- (void)getcodeWithMethod:(NSString *)method response:(void(^)(BOOL isSuccess, id responseObj, NSString *msg))response;
-
-- (void)loginWithMethod:(NSString *)method response:(void(^)(BOOL isSuccess, id responseObj, NSString *msg))response;
-
-- (void)codeConfirmWithMethod:(NSString *)method response:(void(^)(BOOL isSuccess, id responseObj, NSString *msg))response;
-
-- (void)changeWithMethod:(NSString *)method needToken:(BOOL)needToken response:(void(^)(BOOL isSuccess, id responseObj, NSString *msg))response;
-
-///Path
-
-@property (nonatomic, copy) NSString *loginUrl;
-
-@property (nonatomic, copy) NSString *getCodeUrl;
-
-/**验证码登录、注册、忘记密码 的path*/
-@property (nonatomic, copy) NSString *codeConfirmUrl;
-
-@property (nonatomic, copy) NSString *changeUrl;
-
 /**是否国际化*/
 @property (nonatomic, assign) BOOL isInternational;
 
@@ -89,8 +72,6 @@ typedef enum : NSUInteger {
 @property (nonatomic, assign) NSInteger pswdLengthLimit;
 
 @property (nonatomic, assign) NSInteger codeLengthLimit;
-
-
 
 ///提示语
 @property (nonatomic, copy) NSString *wrongPhoneNum;
@@ -108,5 +89,7 @@ typedef enum : NSUInteger {
 @property (nonatomic, copy) NSString *pswdDiff;
 
 @property (nonatomic, copy) NSString *pswdSame;
+/**获取sign (时间戳需自己手动加入dict）*/
++ (NSDictionary *)signWithDictionary:(NSDictionary *)dictionary pswdKey:(NSString *)pswdKey secretKey:(NSString *)secretKey encrypt:(NSString *(^)(NSString *keyword))encrypt;
 
 @end

@@ -63,8 +63,6 @@ typedef enum : NSUInteger {
 
 @property (nonatomic, assign) NSInteger countDownCount;
 
-- (void)startCountDown;
-
 - (void)cancelTiemr;
 
 /**是否国际化*/

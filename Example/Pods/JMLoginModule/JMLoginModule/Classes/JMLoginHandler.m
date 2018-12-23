@@ -23,6 +23,7 @@
     
     NSTimer *_timer;
     NSInteger _count;
+    
 }
 
 @end
@@ -198,14 +199,14 @@
     self.codeTitle = [NSString stringWithFormat:self.codeTitleFormatter, _count];
     self.codeBtnEnable = NO;
     if (_count == 0) {
+        self.codeTitle = self.codeOriginalTitle;
+        self.codeBtnEnable = YES;
         [self cancelTiemr];
     }
     _count --;
 }
 
 - (void)cancelTiemr {
-    self.codeTitle = self.codeOriginalTitle;
-    self.codeBtnEnable = YES;
     if(_timer){
         [_timer invalidate];
         _timer = nil;

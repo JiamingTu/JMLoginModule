@@ -1,3 +1,16 @@
-PODFILE CHECKSUM: f601ace0ef0273149977631d6207b8bea2fb9d2f
+PODS:
+  - JMLoginModule (0.0.3)
+
+DEPENDENCIES:
+  - JMLoginModule (from `../`)
+
+EXTERNAL SOURCES:
+  JMLoginModule:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  JMLoginModule: 21f849cb24ea85a63683aabe53285fc030449d5a
+
+PODFILE CHECKSUM: 8cb80c53dc367099ec7bba9707eb837b651273dc
 
 COCOAPODS: 1.5.3

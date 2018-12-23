@@ -1,6 +1,6 @@
 {
   "name": "JMLoginModule",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "summary": "登录组件（依赖TJMBaseTool）",
   "description": "包括登录、验证码登录、忘记密码、注册、修改密码功能(没有sign 功能，后续更新)",
   "homepage": "https://github.com/JiamingTu/JMLoginModule",
@@ -13,7 +13,7 @@
   },
   "source": {
     "git": "https://github.com/JiamingTu/JMLoginModule.git",
-    "tag": "0.0.2"
+    "tag": "0.0.3"
   },
   "platforms": {
     "ios": "9.0"

@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'JMLoginModule'
-  s.version          = '0.0.3'
+  s.version          = '0.0.4'
   s.summary          = '登录组件（依赖TJMBaseTool）'
 
 # This description is used to generate tags and improve search results.
@@ -18,7 +18,7 @@ Pod::Spec.new do |s|
 #   * Finally, don't worry about the indent, CocoaPods strips it!
 
   s.description      = <<-DESC
-包括登录、验证码登录、忘记密码、注册、修改密码功能(没有sign 功能，后续更新)
+包括登录、验证码登录、忘记密码、注册、修改密码功能
                        DESC
 
   s.homepage         = 'https://github.com/JiamingTu/JMLoginModule'

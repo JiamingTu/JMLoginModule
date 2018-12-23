@@ -70,6 +70,8 @@ typedef enum : NSUInteger {
 /**是否国际化*/
 @property (nonatomic, assign) BOOL isInternational;
 
+- (NSString *)notice;
+
 /**密码至少几位 默认6*/
 @property (nonatomic, assign) NSInteger pswdLengthLimit;
 
